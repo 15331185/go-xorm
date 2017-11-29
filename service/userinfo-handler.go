@@ -3,7 +3,9 @@ package service
 import (
 	"net/http"
 	"strconv"
-	"entities"
+
+	"github.com/my937889621/Go-Project/src/cloudgo-data/entities"
+
 	"github.com/unrolled/render"
 )
 
@@ -11,7 +13,7 @@ func postUserInfoHandler(formatter *render.Render) http.HandlerFunc {
 
 	return func(w http.ResponseWriter, req *http.Request) {
 		req.ParseForm()
-		if req.Form["username"] == nil || len(req.Form["username"][0]) == 0 {
+		if len(req.Form["username"][0]) == 0 {
 			formatter.JSON(w, http.StatusBadRequest, struct{ ErrorIndo string }{"Bad Input!"})
 			return
 		}
@@ -26,7 +28,7 @@ func getUserInfoHandler(formatter *render.Render) http.HandlerFunc {
 
 	return func(w http.ResponseWriter, req *http.Request) {
 		req.ParseForm()
-		if req.Form["userid"] == nil || len(req.Form["userid"][0]) != 0 {
+		if len(req.Form["userid"][0]) != 0 {
 			i, _ := strconv.ParseInt(req.Form["userid"][0], 10, 32)
 
 			u := entities.UserInfoService.FindByID(int(i))
