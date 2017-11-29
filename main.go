@@ -2,7 +2,9 @@ package main
 
 import (
 	"os"
-	"service"
+
+	"github.com/my937889621/Go-Project/src/cloudgo-data/service"
+
 	flag "github.com/spf13/pflag"
 )
 
